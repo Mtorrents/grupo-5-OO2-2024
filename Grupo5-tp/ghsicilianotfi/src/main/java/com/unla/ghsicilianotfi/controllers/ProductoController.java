@@ -20,17 +20,11 @@ public class ProductoController {
     public ProductoController(IProductoService productoService) {
         this.productoService = productoService;
     }
-
-    @GetMapping("")
-    public ModelAndView index() {
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_INDEX);
-        mAV.addObject("productos", productoService.getAll());
-        return mAV;
-    }
-
+    
+    
     @GetMapping("/new")
     public ModelAndView create() {
-        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_NEW);
+        ModelAndView mAV = new ModelAndView(ViewRouteHelper.PRODUCTO_INDEX);
         mAV.addObject("producto", new ProductoDTO());
         return mAV;
     }
@@ -59,7 +53,7 @@ public class ProductoController {
             productoToUpdate.setPrecio(productoDTO.getPrecio());
             productoService.insertOrUpdate(productoToUpdate);
         }
-        return new RedirectView(ViewRouteHelper.PRODUCTO_ROOT);
+        return new RedirectView(ViewRouteHelper.PRODUCTO_UPDATE);
     }
 
     @PostMapping("/delete/{id}")

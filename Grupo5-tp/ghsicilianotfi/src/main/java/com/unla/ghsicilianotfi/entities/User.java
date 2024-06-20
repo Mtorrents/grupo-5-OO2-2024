@@ -13,27 +13,23 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Getter @Setter @NoArgsConstructor
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "username", unique = true, nullable = false, length = 45)
+	@Column(name="username", unique=true, nullable=false, length=45)
 	private String username;
 
-	@Column(name = "password", nullable = false, length = 60)
+	@Column(name="password", nullable=false, length=60)
 	private String password;
 
 	private boolean enabled;
@@ -44,12 +40,8 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="user")
 	private Set<UserRole> userRoles = new HashSet<>();
-
-	@ManyToOne
-	@JoinColumn(name = "id_registro")
-	private Registro registro;
 
 	public User(String username, String password, boolean enabled) {
 		this.username = username;
@@ -57,11 +49,10 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public User(String username, String password, boolean enabled, Set<UserRole> userRoles, Registro registro) {
+	public User(String username, String password, boolean enabled, Set<UserRole> userRoles) {
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.userRoles = userRoles;
-		this.registro = registro;
 	}
 }
