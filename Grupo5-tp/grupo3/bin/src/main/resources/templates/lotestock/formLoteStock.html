@@ -34,12 +34,6 @@
                 <label for="cantidad">Cantidad:</label>
                 <input type="number" class="form-control" id="cantidad" name="cantidad" th:value="${loteStock.cantidad}" required>
             </div>
-			<div class="form-group">
-			               <label for="producto">Producto:</label>
-			               <select class="form-control" id="producto" name="producto" required>
-			                   <option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.nombre}"></option>
-			               </select>
-			 </div>
             <input type="hidden" name="idLote" th:value="${loteStock.idLote}">
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario de Lote de Stock</title>
+    <title>Formulario de Informe de Producto</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,33 +14,27 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/lotestock/index">Lista de Lotes de Stock</a>
+                    <a class="nav-link" href="/informe/index">Lista de Informes</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container mt-5">
-        <h1>Agregar/Editar Lote de Stock</h1>
-        <form action="/lotestock/guardar" method="post">
+        <h1>Agregar/Editar Informe de Producto</h1>
+        <form action="/informe/guardar" method="post">
             <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" th:value="${loteStock.nombre}" required>
+                <label for="detalle">Detalle:</label>
+                <input type="text" class="form-control" id="detalle" name="detalle" th:value="${informe.detalle}" required>
             </div>
             <div class="form-group">
-                <label for="descripcion">Descripción:</label>
-                <input type="text" class="form-control" id="descripcion" name="descripcion" th:value="${loteStock.descripcion}" required>
+                <label for="responsable">Responsable:</label>
+                <input type="text" class="form-control" id="responsable" name="responsable" th:value="${informe.responsable}" required>
             </div>
             <div class="form-group">
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" class="form-control" id="cantidad" name="cantidad" th:value="${loteStock.cantidad}" required>
+                <label for="fecha">Fecha:</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" th:value="${informe.fecha}" required>
             </div>
-			<div class="form-group">
-			               <label for="producto">Producto:</label>
-			               <select class="form-control" id="producto" name="producto" required>
-			                   <option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.nombre}"></option>
-			               </select>
-			 </div>
-            <input type="hidden" name="idLote" th:value="${loteStock.idLote}">
+            <input type="hidden" name="idInforme" th:value="${informe.idInforme}">
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
     </div>

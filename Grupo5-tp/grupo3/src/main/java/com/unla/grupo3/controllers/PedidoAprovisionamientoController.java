@@ -1,6 +1,7 @@
 package com.unla.grupo3.controllers;
 
 import com.unla.grupo3.entities.PedidoAprovisionamiento;
+import com.unla.grupo3.services.implementation.LoteStockService;
 import com.unla.grupo3.services.implementation.PedidoAprovisionamientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ public class PedidoAprovisionamientoController {
 
 	@Autowired
     private PedidoAprovisionamientoService pedidoService;
+	
+	@Autowired
+    private LoteStockService loteStockService;
 
     @GetMapping("/index")
     public String index(Model model) {
@@ -26,6 +30,7 @@ public class PedidoAprovisionamientoController {
     @GetMapping("/form")
     public String form(Model model) {
         model.addAttribute("pedido", new PedidoAprovisionamiento());
+        model.addAttribute("lotes", loteStockService.listarTodos());
         return "formPedidoAprovisionamiento";
     }
 
@@ -39,6 +44,7 @@ public class PedidoAprovisionamientoController {
     public String editar(@PathVariable int id, Model model) {
         PedidoAprovisionamiento pedido = pedidoService.findById(id);
         model.addAttribute("pedido", pedido);
+        model.addAttribute("lotes", loteStockService.listarTodos());
         return "formPedidoAprovisionamiento";
     }
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.unla.grupo3.entities.LoteStock;
 import com.unla.grupo3.services.implementation.LoteStockService;
+import com.unla.grupo3.services.implementation.ProductoService;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ public class LoteStockController {
 
     @Autowired
     private LoteStockService loteStockService;
+    
+    @Autowired
+    private ProductoService productoService;
 
     @GetMapping("/index")
     public String listarLotes(Model model) {
@@ -32,6 +36,7 @@ public class LoteStockController {
     @GetMapping("/form")
     public String mostrarFormulario(Model model) {
         model.addAttribute("loteStock", new LoteStock());
+        model.addAttribute("productos", productoService.findAll());
         return "lotestock/formLoteStock"; // Nombre del archivo de la vista para el formulario
     }
 
@@ -45,6 +50,7 @@ public class LoteStockController {
     public String editarLote(@PathVariable("id") Long id, Model model) {
         LoteStock loteStock = loteStockService.obtenerPorId(id);
         model.addAttribute("loteStock", loteStock);
+        model.addAttribute("productos", productoService.findAll());
         return "lotestock/formLoteStock"; // Nombre del archivo de la vista para el formulario
     }
 

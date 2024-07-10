@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lotes</title>
+    <title>Lista de Lotes de Stock</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,34 +14,31 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/lote/form">Agregar Lote</a>
+                    <a class="nav-link" href="/lotestock/form">Agregar Lote</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container mt-5">
-        <h1>Lista de Lotes</h1>
-        <a href="/lote/form" class="btn btn-primary">Agregar Lote</a>
-        <table class="table mt-3">
+        <h1>Lista de Lotes de Stock</h1>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Cantidad</th>
-                    <th>Fecha de Recepción</th>
-                    <th>Proveedor</th>
-                    <th>Precio</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Aquí se iterará sobre la lista de lotes -->
-                <tr th:each="lote : ${lotes}">
-                    <td th:text="${lote.idLote}">1</td>
-                    <td th:text="${lote.descripcion}">Lote 1</td>
-                    <td th:text="${lote.cantidad}">100</td>
-                    <td th:text="${lote.fechaDeRecepcion}">2023-06-30</td>
-                    <td th:text="${lote.proveedor}">Proveedor 1</td>
-                    <td th:text="${lote.precio}">1000.00</td>
+					<tr th:each="lote : ${lotes}">
+					    <td th:text="${lote.nombre}">Nombre</td>
+                    <td th:text="${lote.descripcion}">Descripción</td>
+                    <td th:text="${lote.cantidad}">Cantidad</td>
+                    <td>
+                        <a th:href="@{/lotestock/editar/{id}(id=${lote.idLote})}" class="btn btn-warning btn-sm">Modificar</a>
+                        <a th:href="@{/lotestock/eliminar/{id}(id=${lote.idLote})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

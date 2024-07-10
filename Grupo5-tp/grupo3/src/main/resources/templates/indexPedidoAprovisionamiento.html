@@ -28,6 +28,7 @@
                     <th>Descripción</th>
                     <th>Cantidad</th>
                     <th>Fecha Pedido</th>
+					<th>Lote Stock</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -37,6 +38,7 @@
                     <td th:text="${pedido.descripcion}">Descripción</td>
                     <td th:text="${pedido.cantidad}">Cantidad</td>
                     <td th:text="${pedido.fechaPedido}">Fecha Pedido</td>
+					<td th:text="${pedido.loteStock.nombre}">Lote de Stock</td> 
                     <td>
                         <a th:href="@{/pedidoaprovisionamiento/editar/{id}(id=${pedido.idPedido})}" class="btn btn-warning btn-sm">Modificar</a>
                         <a th:href="@{/pedidoaprovisionamiento/eliminar/{id}(id=${pedido.idPedido})}" class="btn btn-danger btn-sm">Eliminar</a>

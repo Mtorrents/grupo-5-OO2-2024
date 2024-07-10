@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Informes de Productos</title>
+    <title>Lista de Pedidos de Aprovisionamiento</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,30 +14,32 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/informe/form">Agregar Informe</a>
+                    <a class="nav-link" href="/pedidoaprovisionamiento/form">Agregar Pedido</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container mt-5">
-        <h1>Lista de Informes de Productos</h1>
+        <h1>Lista de Pedidos de Aprovisionamiento</h1>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Detalle</th>
-                    <th>Responsable</th>
-                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Fecha Pedido</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="informe : ${informes}">
-                    <td th:text="${informe.detalle}">Detalle</td>
-                    <td th:text="${informe.responsable}">Responsable</td>
-                    <td th:text="${informe.fecha}">Fecha</td>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.nombre}">Nombre</td>
+                    <td th:text="${pedido.descripcion}">Descripción</td>
+                    <td th:text="${pedido.cantidad}">Cantidad</td>
+                    <td th:text="${pedido.fechaPedido}">Fecha Pedido</td>
                     <td>
-                        <a th:href="@{/informe/editar/{id}(id=${informe.idInforme})}" class="btn btn-warning btn-sm">Modificar</a>
-                        <a th:href="@{/informe/eliminar/{id}(id=${informe.idInforme})}" class="btn btn-danger btn-sm">Eliminar</a>
+                        <a th:href="@{/pedidoaprovisionamiento/editar/{id}(id=${pedido.idPedido})}" class="btn btn-warning btn-sm">Modificar</a>
+                        <a th:href="@{/pedidoaprovisionamiento/eliminar/{id}(id=${pedido.idPedido})}" class="btn btn-danger btn-sm">Eliminar</a>
                     </td>
                 </tr>
             </tbody>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Productos</title>
+    <title>Lista de Productos</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -21,23 +21,24 @@
     </nav>
     <div class="container mt-5">
         <h1>Lista de Productos</h1>
-        <a href="/producto/form" class="btn btn-primary">Agregar Producto</a>
-        <table class="table mt-3">
+        <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Precio</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Aquí se iterará sobre la lista de productos -->
                 <tr th:each="producto : ${productos}">
-                    <td th:text="${producto.idProducto}">1</td>
-                    <td th:text="${producto.nombre}">Producto 1</td>
-                    <td th:text="${producto.descripcion}">Descripción 1</td>
-                    <td th:text="${producto.precio}">100.00</td>
+                    <td th:text="${producto.nombre}">Nombre</td>
+                    <td th:text="${producto.descripcion}">Descripción</td>
+                    <td th:text="${producto.precio}">Precio</td>
+                    <td>
+                        <a th:href="@{/producto/editar/{id}(id=${producto.idProducto})}" class="btn btn-warning btn-sm">Modificar</a>
+                        <a th:href="@{/producto/eliminar/{id}(id=${producto.idProducto})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

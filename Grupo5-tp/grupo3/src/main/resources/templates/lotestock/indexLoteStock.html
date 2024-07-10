@@ -27,6 +27,7 @@
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Cantidad</th>
+					<th>NombreProducto</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
 					    <td th:text="${lote.nombre}">Nombre</td>
                     <td th:text="${lote.descripcion}">Descripción</td>
                     <td th:text="${lote.cantidad}">Cantidad</td>
+					<td th:text="${lote.producto.nombre}">Nombre Producto</td>
                     <td>
                         <a th:href="@{/lotestock/editar/{id}(id=${lote.idLote})}" class="btn btn-warning btn-sm">Modificar</a>
                         <a th:href="@{/lotestock/eliminar/{id}(id=${lote.idLote})}" class="btn btn-danger btn-sm">Eliminar</a>
