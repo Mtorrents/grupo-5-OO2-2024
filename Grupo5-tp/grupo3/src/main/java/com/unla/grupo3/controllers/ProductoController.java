@@ -18,7 +18,7 @@ public class ProductoController {
 
 	@GetMapping("/index")
 	public String listProductos(Model model) {
-		List<Producto> productos = productoService.findAllProductos();
+		List<Producto> productos = productoService.findAll();
 		model.addAttribute("productos", productos);
 		return "producto/index";
 	}

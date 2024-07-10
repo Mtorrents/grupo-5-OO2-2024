@@ -21,7 +21,7 @@ import java.util.List;
 public class InformeProducto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idInforme;
+	private Long idInforme;
 	private String detalle;
 	private String responsable;
 	private LocalDate fecha;

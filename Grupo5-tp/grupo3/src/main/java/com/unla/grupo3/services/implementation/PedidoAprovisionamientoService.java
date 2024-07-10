@@ -1,25 +1,31 @@
 package com.unla.grupo3.services.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.unla.grupo3.entities.PedidoAprovisionamiento;
 import com.unla.grupo3.repositories.PedidoAprovisionamientoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Service("pedidoAprovisionamientoService")
+import java.util.List;
+
+@Service
 public class PedidoAprovisionamientoService {
 
-    @Autowired
-    private PedidoAprovisionamientoRepository pedidoAprovisionamientoRepository;
+	@Autowired
+    private PedidoAprovisionamientoRepository repository;
 
-    public PedidoAprovisionamiento crearPedido(PedidoAprovisionamiento pedido) {
-        return pedidoAprovisionamientoRepository.save(pedido);
+    public List<PedidoAprovisionamiento> findAll() {
+        return repository.findAll();
     }
 
-    public PedidoAprovisionamiento modificarPedido(PedidoAprovisionamiento pedido) {
-        return pedidoAprovisionamientoRepository.save(pedido);
+    public PedidoAprovisionamiento findById(int id) {
+        return repository.findById(id).orElse(null);
     }
 
-    public void eliminarPedido(int idPedido) {
-        pedidoAprovisionamientoRepository.deleteById(idPedido);
+    public void save(PedidoAprovisionamiento pedido) {
+        repository.save(pedido);
+    }
+
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 }

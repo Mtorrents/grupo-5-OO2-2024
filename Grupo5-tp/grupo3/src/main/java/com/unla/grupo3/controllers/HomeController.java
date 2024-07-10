@@ -32,4 +32,6 @@ public class HomeController {
 	public RedirectView redirectToHomeIndex() {
 		return new RedirectView(ViewRouteHelper.ROUTE);
 	}
+	
+	
 }

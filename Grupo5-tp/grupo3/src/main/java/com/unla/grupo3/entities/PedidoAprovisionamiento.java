@@ -19,6 +19,7 @@ public class PedidoAprovisionamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPedido;
+    private String nombre;
     private String descripcion;
     private int cantidad;
     private LocalDate fechaPedido;

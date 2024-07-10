@@ -11,22 +11,25 @@ import java.util.Optional;
 @Service
 public class ProductoService {
 
-    @Autowired
-    private ProductoRepository productoRepository;
+	@Autowired
+	private ProductoRepository productoRepository;
 
-    public List<Producto> findAllProductos() {
-        return productoRepository.findAll();
-    }
+	public List<Producto> findAll() {
+		return productoRepository.findAll();
+	}
+	 public List<Producto> obtenerTodosLosProductos() {
+	        return productoRepository.findAll();
+	    }
 
-    public Optional<Producto> findProductoById(int id) {
-        return productoRepository.findById(id);
-    }
+	public Optional<Producto> findProductoById(int id) {
+		return productoRepository.findById(id);
+	}
 
-    public void save(Producto producto) {
-        productoRepository.save(producto);
-    }
+	public void save(Producto producto) {
+		productoRepository.save(producto);
+	}
 
-    public void delete(Producto producto) {
-        productoRepository.delete(producto);
-    }
+	public void delete(Producto producto) {
+		productoRepository.delete(producto);
+	}
 }

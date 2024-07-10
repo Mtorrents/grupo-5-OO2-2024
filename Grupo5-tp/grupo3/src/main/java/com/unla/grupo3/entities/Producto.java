@@ -22,7 +22,7 @@ import java.util.List;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idProducto;
+    private Long idProducto;
     private String nombre;
     private String descripcion;
     private double precio;
@@ -35,5 +35,12 @@ public class Producto {
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LoteStock> loteStock;
+    public Long getId() {
+        return idProducto;
+    }
+
+    public void setId(Long id) {
+        this.idProducto = id;
+    }
 
 }
