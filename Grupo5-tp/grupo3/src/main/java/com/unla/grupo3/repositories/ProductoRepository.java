@@ -10,6 +10,6 @@ import com.unla.grupo3.entities.Producto;
 @Repository("productoRepository")
 public interface ProductoRepository extends JpaRepository<Producto, Serializable> {
 
-    @Query("SELECT p FROM Producto p JOIN FETCH p.loteStock WHERE p.idProducto = (:idProducto)")
-    public abstract Producto findByIdAndFetchLoteStockEagerly(@Param("idProducto") int idProducto);
+	@Query("SELECT p FROM Producto p JOIN FETCH p.loteStock WHERE p.idProducto = (:idProducto)")
+	public abstract Producto findByIdAndFetchLoteStockEagerly(@Param("idProducto") int idProducto);
 }

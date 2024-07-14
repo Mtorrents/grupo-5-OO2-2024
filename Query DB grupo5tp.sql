@@ -31,8 +31,11 @@ CREATE TABLE `informe_producto` (
   `fecha` date DEFAULT NULL,
   `responsable` varchar(255) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
-  PRIMARY KEY (`id_informe`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `lote_stock_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id_informe`),
+  KEY `FKn354fq5o5g5asbt6bve146kq5` (`lote_stock_id`),
+  CONSTRAINT `FKn354fq5o5g5asbt6bve146kq5` FOREIGN KEY (`lote_stock_id`) REFERENCES `lote_stock` (`id_lote`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,17 +59,17 @@ CREATE TABLE `lote_stock` (
   `cantidad` int NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `fecha_de_recepcion` date DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
   `precio` double NOT NULL,
   `proveedor` varchar(255) DEFAULT NULL,
   `informe_id` bigint DEFAULT NULL,
   `producto_id` bigint DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_lote`),
   KEY `FKciwyda0e7t5cqonyfuyyuiiuc` (`informe_id`),
   KEY `FK20gq7sji6qdeuygsbf8o8l0gw` (`producto_id`),
   CONSTRAINT `FK20gq7sji6qdeuygsbf8o8l0gw` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id_producto`),
   CONSTRAINT `FKciwyda0e7t5cqonyfuyyuiiuc` FOREIGN KEY (`informe_id`) REFERENCES `informe_producto` (`id_informe`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +78,6 @@ CREATE TABLE `lote_stock` (
 
 LOCK TABLES `lote_stock` WRITE;
 /*!40000 ALTER TABLE `lote_stock` DISABLE KEYS */;
-INSERT INTO `lote_stock` VALUES (8,2,'amigo',NULL,0,NULL,NULL,4,'Martina');
 /*!40000 ALTER TABLE `lote_stock` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,13 +94,13 @@ CREATE TABLE `pedido_aprovisionamiento` (
   `created_at` datetime(6) DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `fecha_pedido` date DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   `lote_stock_id` bigint DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_pedido`),
   KEY `FK6u963ve0mirnclkfwcul9380k` (`lote_stock_id`),
   CONSTRAINT `FK6u963ve0mirnclkfwcul9380k` FOREIGN KEY (`lote_stock_id`) REFERENCES `lote_stock` (`id_lote`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -128,7 +130,7 @@ CREATE TABLE `producto` (
   PRIMARY KEY (`id_producto`),
   KEY `FKb5vi4vtk7iqliun9jqukpxh65` (`registro_id`),
   CONSTRAINT `FKb5vi4vtk7iqliun9jqukpxh65` FOREIGN KEY (`registro_id`) REFERENCES `registro` (`id_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +139,6 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (4,NULL,'bebida azucarada','coca cola',1200,NULL,NULL);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +154,7 @@ CREATE TABLE `registro` (
   `descripcion` varchar(255) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_registro`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,9 +181,12 @@ CREATE TABLE `user` (
   `token` varchar(255) DEFAULT NULL,
   `updated_at` datetime(6) DEFAULT NULL,
   `username` varchar(45) NOT NULL,
+  `registro_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`username`),
+  KEY `FK177j31bk0nwafj8e1djk816tf` (`registro_id`),
+  CONSTRAINT `FK177j31bk0nwafj8e1djk816tf` FOREIGN KEY (`registro_id`) REFERENCES `registro` (`id_registro`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +195,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'2024-07-08 20:16:17.000000',_binary '','$2a$10$DuN6oCVKCYpwSf32Vot6z.dC3rukWtCWiugvfy9W66jcaNFSL00/2',NULL,NULL,'administrador'),(2,'2024-07-09 20:16:17.000000',_binary '','$2a$10$DuN6oCVKCYpwSf32Vot6z.dC3rukWtCWiugvfy9W66jcaNFSL00/2',NULL,NULL,'cliente');
+INSERT INTO `user` VALUES (1,'2024-07-08 20:16:17.000000',_binary '','$2a$10$Ay1yhpSKl4MHy.LayU6YYuYCQ.Snj09yuJDuqbqKdJkNZ0SrA/ftO',NULL,NULL,'administrador',NULL),(2,'2024-07-09 20:16:17.000000',_binary '','$2a$10$Ay1yhpSKl4MHy.LayU6YYuYCQ.Snj09yuJDuqbqKdJkNZ0SrA/ftO',NULL,NULL,'cliente',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +216,7 @@ CREATE TABLE `user_role` (
   UNIQUE KEY `UKscfpive7aa0o9savdwmxmnaij` (`role`,`user_id`),
   KEY `FK859n2jvi8ivhui0rl0esws6o` (`user_id`),
   CONSTRAINT `FK859n2jvi8ivhui0rl0esws6o` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +225,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (8,'2024-07-08 20:16:21.000000','ROLE_ADMIN','2024-07-08 20:16:21.000000',1),(9,'2024-07-08 20:16:21.000000','ROLE_USER','2024-07-08 20:16:21.000000',1),(10,'2024-07-09 20:16:21.000000','ROLE_USER','2024-07-09 20:16:21.000000',2);
+INSERT INTO `user_role` VALUES (1,'2024-07-08 20:16:21.000000','ROLE_ADMIN','2024-07-08 20:16:21.000000',1),(2,'2024-07-08 20:16:21.000000','ROLE_USER','2024-07-08 20:16:21.000000',1),(3,'2024-07-09 20:16:21.000000','ROLE_USER','2024-07-09 20:16:21.000000',2);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-13 18:02:01
+-- Dump completed on 2024-07-14 18:17:19

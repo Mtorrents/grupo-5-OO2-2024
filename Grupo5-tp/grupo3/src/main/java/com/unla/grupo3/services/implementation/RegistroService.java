@@ -11,22 +11,22 @@ import java.util.Optional;
 @Service
 public class RegistroService {
 
-    @Autowired
-    private RegistroRepository registroRepository;
+	@Autowired
+	private RegistroRepository registroRepository;
 
-    public List<Registro> findAllRegistros() {
-        return registroRepository.findAll();
-    }
+	public List<Registro> findAllRegistros() {
+		return registroRepository.findAll();
+	}
 
-    public Optional<Registro> findRegistroById(int id) {
-        return registroRepository.findById(id);
-    }
+	public Optional<Registro> findRegistroById(int id) {
+		return registroRepository.findById(id);
+	}
 
-    public void save(Registro registro) {
-        registroRepository.save(registro);
-    }
+	public void save(Registro registro) {
+		registroRepository.save(registro);
+	}
 
-    public void delete(Registro registro) {
-        registroRepository.delete(registro);
-    }
+	public void delete(Registro registro) {
+		registroRepository.delete(registro);
+	}
 }

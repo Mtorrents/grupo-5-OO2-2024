@@ -10,6 +10,6 @@ import com.unla.grupo3.entities.PedidoAprovisionamiento;
 @Repository("pedidoAprovisionamientoRepository")
 public interface PedidoAprovisionamientoRepository extends JpaRepository<PedidoAprovisionamiento, Serializable> {
 
-    @Query("SELECT p FROM PedidoAprovisionamiento p JOIN FETCH p.loteStock WHERE p.idPedido = (:idPedido)")
-    public abstract PedidoAprovisionamiento findByIdAndFetchLoteStockEagerly(@Param("idPedido") int idPedido);
+	@Query("SELECT p FROM PedidoAprovisionamiento p JOIN FETCH p.loteStock WHERE p.idPedido = (:idPedido)")
+	public abstract PedidoAprovisionamiento findByIdAndFetchLoteStockEagerly(@Param("idPedido") int idPedido);
 }

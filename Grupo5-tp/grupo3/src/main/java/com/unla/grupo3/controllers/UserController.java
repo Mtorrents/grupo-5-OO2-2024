@@ -11,9 +11,8 @@ import com.unla.grupo3.helpers.ViewRouteHelper;
 public class UserController {
 
 	@GetMapping("/login")
-	public String login(Model model,
-						@RequestParam(name="error",required=false) String error,
-						@RequestParam(name="logout", required=false) String logout) {
+	public String login(Model model, @RequestParam(name = "error", required = false) String error,
+			@RequestParam(name = "logout", required = false) String logout) {
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
 		return ViewRouteHelper.USER_LOGIN;
@@ -26,8 +25,9 @@ public class UserController {
 
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//user.getUserRoles()
+		// User user = (User)
+		// SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		// user.getUserRoles()
 		return "redirect:/user";
 	}
 }

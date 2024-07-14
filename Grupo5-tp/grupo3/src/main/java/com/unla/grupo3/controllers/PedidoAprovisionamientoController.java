@@ -15,43 +15,43 @@ import java.util.List;
 public class PedidoAprovisionamientoController {
 
 	@Autowired
-    private PedidoAprovisionamientoService pedidoService;
-	
+	private PedidoAprovisionamientoService pedidoService;
+
 	@Autowired
-    private LoteStockService loteStockService;
+	private LoteStockService loteStockService;
 
-    @GetMapping("/index")
-    public String index(Model model) {
-        List<PedidoAprovisionamiento> pedidos = pedidoService.findAll();
-        model.addAttribute("pedidos", pedidos);
-        return "indexPedidoAprovisionamiento";
-    }
+	@GetMapping("/index")
+	public String index(Model model) {
+		List<PedidoAprovisionamiento> pedidos = pedidoService.findAll();
+		model.addAttribute("pedidos", pedidos);
+		return "indexPedidoAprovisionamiento";
+	}
 
-    @GetMapping("/form")
-    public String form(Model model) {
-        model.addAttribute("pedido", new PedidoAprovisionamiento());
-        model.addAttribute("lotes", loteStockService.listarTodos());
-        return "formPedidoAprovisionamiento";
-    }
+	@GetMapping("/form")
+	public String form(Model model) {
+		model.addAttribute("pedido", new PedidoAprovisionamiento());
+		model.addAttribute("lotes", loteStockService.listarTodos());
+		return "formPedidoAprovisionamiento";
+	}
 
-    @PostMapping("/guardar")
-    public String guardar(@ModelAttribute PedidoAprovisionamiento pedido) {
-        pedidoService.save(pedido);
-        return "redirect:/pedidoaprovisionamiento/index";
-    }
+	@PostMapping("/guardar")
+	public String guardar(@ModelAttribute PedidoAprovisionamiento pedido) {
+		pedidoService.save(pedido);
+		return "redirect:/pedidoaprovisionamiento/index";
+	}
 
-    @GetMapping("/editar/{id}")
-    public String editar(@PathVariable int id, Model model) {
-        PedidoAprovisionamiento pedido = pedidoService.findById(id);
-        model.addAttribute("pedido", pedido);
-        model.addAttribute("lotes", loteStockService.listarTodos());
-        return "formPedidoAprovisionamiento";
-    }
+	@GetMapping("/editar/{id}")
+	public String editar(@PathVariable int id, Model model) {
+		PedidoAprovisionamiento pedido = pedidoService.findById(id);
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("lotes", loteStockService.listarTodos());
+		return "formPedidoAprovisionamiento";
+	}
 
-    @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable int id) {
-        pedidoService.deleteById(id);
-        return "redirect:/pedidoaprovisionamiento/index";
-    }
+	@GetMapping("/eliminar/{id}")
+	public String eliminar(@PathVariable int id) {
+		pedidoService.deleteById(id);
+		return "redirect:/pedidoaprovisionamiento/index";
+	}
 
 }

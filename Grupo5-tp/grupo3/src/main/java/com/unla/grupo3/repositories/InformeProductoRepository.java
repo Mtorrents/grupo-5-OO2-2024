@@ -10,6 +10,6 @@ import com.unla.grupo3.entities.InformeProducto;
 @Repository("informeProductoRepository")
 public interface InformeProductoRepository extends JpaRepository<InformeProducto, Serializable> {
 
-    @Query("SELECT i FROM InformeProducto i JOIN FETCH i.loteStock WHERE i.idInforme = (:idInforme)")
-    public abstract InformeProducto findByIdAndFetchLoteStockEagerly(@Param("idInforme") int idInforme);
+	@Query("SELECT i FROM InformeProducto i JOIN FETCH i.loteStock WHERE i.idInforme = (:idInforme)")
+	public abstract InformeProducto findByIdAndFetchLoteStockEagerly(@Param("idInforme") int idInforme);
 }

@@ -13,6 +13,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,7 +46,11 @@ public class User {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<UserRole> userRoles = new HashSet<>();
-	
+
+	@ManyToOne
+	@JoinColumn(name = "registro_id")
+	private Registro registro;
+
 	private String token;
 
 	public User(String username, String password, boolean enabled) {
@@ -58,10 +64,11 @@ public class User {
 		this.password = password;
 		this.enabled = enabled;
 		this.userRoles = userRoles;
+		this.registro = registro;
 	}
 
 	public void setToken(Object object) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

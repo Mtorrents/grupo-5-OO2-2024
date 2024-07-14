@@ -16,17 +16,18 @@ import java.util.Set;
 @Service("userService")
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        user.getUserRoles().forEach(role -> grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole())));
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
-    }
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
+		if (user == null) {
+			throw new UsernameNotFoundException("User not found");
+		}
+		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+		user.getUserRoles().forEach(role -> grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole())));
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+				grantedAuthorities);
+	}
 }

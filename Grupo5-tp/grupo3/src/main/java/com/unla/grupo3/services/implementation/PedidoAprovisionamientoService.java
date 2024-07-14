@@ -11,21 +11,21 @@ import java.util.List;
 public class PedidoAprovisionamientoService {
 
 	@Autowired
-    private PedidoAprovisionamientoRepository repository;
+	private PedidoAprovisionamientoRepository repository;
 
-    public List<PedidoAprovisionamiento> findAll() {
-        return repository.findAll();
-    }
+	public List<PedidoAprovisionamiento> findAll() {
+		return repository.findAll();
+	}
 
-    public PedidoAprovisionamiento findById(int id) {
-        return repository.findById(id).orElse(null);
-    }
+	public PedidoAprovisionamiento findById(int id) {
+		return repository.findById(id).orElse(null);
+	}
 
-    public void save(PedidoAprovisionamiento pedido) {
-        repository.save(pedido);
-    }
+	public void save(PedidoAprovisionamiento pedido) {
+		repository.save(pedido);
+	}
 
-    public void deleteById(int id) {
-        repository.deleteById(id);
-    }
+	public void deleteById(int id) {
+		repository.deleteById(id);
+	}
 }

@@ -34,6 +34,12 @@
                 <label for="fecha">Fecha:</label>
                 <input type="date" class="form-control" id="fecha" name="fecha" th:value="${informe.fecha}" required>
             </div>
+			<div class="form-group">
+						               <label for="loteStock">Lote de Stock:</label>
+						               <select class="form-control" id="loteStock" name="loteStock" required>
+						                   <option th:each="lote : ${lotes}" th:value="${lote.idLote}" th:text="${lote.nombre}"></option>
+						               </select>
+						           </div>
             <input type="hidden" name="idInforme" th:value="${informe.idInforme}">
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>

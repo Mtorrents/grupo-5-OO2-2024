@@ -27,6 +27,7 @@
                     <th>Detalle</th>
                     <th>Responsable</th>
                     <th>Fecha</th>
+					<th>Lotes de Stock</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
                     <td th:text="${informe.detalle}">Detalle</td>
                     <td th:text="${informe.responsable}">Responsable</td>
                     <td th:text="${informe.fecha}">Fecha</td>
+					<td th:text="${informe.loteStock.nombre}">Lote de Stock</td> 
                     <td>
                         <a th:href="@{/informe/editar/{id}(id=${informe.idInforme})}" class="btn btn-warning btn-sm">Modificar</a>
                         <a th:href="@{/informe/eliminar/{id}(id=${informe.idInforme})}" class="btn btn-danger btn-sm">Eliminar</a>

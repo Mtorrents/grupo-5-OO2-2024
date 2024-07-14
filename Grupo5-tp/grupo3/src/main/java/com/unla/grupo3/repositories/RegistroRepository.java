@@ -10,6 +10,6 @@ import com.unla.grupo3.entities.Registro;
 @Repository("registroRepository")
 public interface RegistroRepository extends JpaRepository<Registro, Serializable> {
 
-    @Query("SELECT r FROM Registro r JOIN FETCH r.productos WHERE r.idRegistro = (:idRegistro)")
-    public abstract Registro findByIdAndFetchProductosEagerly(@Param("idRegistro") int idRegistro);
+	@Query("SELECT r FROM Registro r JOIN FETCH r.productos WHERE r.idRegistro = (:idRegistro)")
+	public abstract Registro findByIdAndFetchProductosEagerly(@Param("idRegistro") int idRegistro);
 }

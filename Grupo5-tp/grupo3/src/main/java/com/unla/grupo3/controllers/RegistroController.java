@@ -13,42 +13,42 @@ import java.util.List;
 @RequestMapping("/registro")
 public class RegistroController {
 
-    @Autowired
-    private RegistroService registroService;
+	@Autowired
+	private RegistroService registroService;
 
-    @GetMapping("/index")
-    public String listRegistros(Model model) {
-        List<Registro> registros = registroService.findAllRegistros();
-        model.addAttribute("registros", registros);
-        return "registro/index";
-    }
+	@GetMapping("/index")
+	public String listRegistros(Model model) {
+		List<Registro> registros = registroService.findAllRegistros();
+		model.addAttribute("registros", registros);
+		return "registro/index";
+	}
 
-    @GetMapping("/form")
-    public String showForm(Model model) {
-        Registro registro = new Registro();
-        model.addAttribute("registro", registro);
-        return "registro/form";
-    }
+	@GetMapping("/form")
+	public String showForm(Model model) {
+		Registro registro = new Registro();
+		model.addAttribute("registro", registro);
+		return "registro/form";
+	}
 
-    @PostMapping("/guardar")
-    public String saveRegistro(@ModelAttribute("registro") Registro registro) {
-        registroService.save(registro);
-        return "redirect:/registro/index";
-    }
+	@PostMapping("/guardar")
+	public String saveRegistro(@ModelAttribute("registro") Registro registro) {
+		registroService.save(registro);
+		return "redirect:/registro/index";
+	}
 
-    @GetMapping("/editar/{id}")
-    public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        Registro registro = registroService.findRegistroById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Invalid registro Id:" + id));
-        model.addAttribute("registro", registro);
-        return "registro/form";
-    }
+	@GetMapping("/editar/{id}")
+	public String showUpdateForm(@PathVariable("id") int id, Model model) {
+		Registro registro = registroService.findRegistroById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid registro Id:" + id));
+		model.addAttribute("registro", registro);
+		return "registro/form";
+	}
 
-    @GetMapping("/eliminar/{id}")
-    public String deleteRegistro(@PathVariable("id") int id) {
-        Registro registro = registroService.findRegistroById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Invalid registro Id:" + id));
-        registroService.delete(registro);
-        return "redirect:/registro/index";
-    }
+	@GetMapping("/eliminar/{id}")
+	public String deleteRegistro(@PathVariable("id") int id) {
+		Registro registro = registroService.findRegistroById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid registro Id:" + id));
+		registroService.delete(registro);
+		return "redirect:/registro/index";
+	}
 }

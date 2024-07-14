@@ -10,6 +10,6 @@ import com.unla.grupo3.entities.LoteStock;
 @Repository("loteStockRepository")
 public interface LoteStockRepository extends JpaRepository<LoteStock, Serializable> {
 
-    @Query("SELECT l FROM LoteStock l JOIN FETCH l.producto WHERE l.idLote = (:idLote)")
-    public abstract LoteStock findByIdAndFetchProductoEagerly(@Param("idLote") int idLote);
+	@Query("SELECT l FROM LoteStock l JOIN FETCH l.producto WHERE l.idLote = (:idLote)")
+	public abstract LoteStock findByIdAndFetchProductoEagerly(@Param("idLote") int idLote);
 }

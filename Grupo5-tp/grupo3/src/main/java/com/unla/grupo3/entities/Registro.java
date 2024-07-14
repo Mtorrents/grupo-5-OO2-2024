@@ -8,14 +8,16 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Registro {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idRegistro;
-    private String nombre;
-    private String descripcion; // Asegúrate de que este campo exista
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idRegistro;
+	private String nombre;
+	private String descripcion; // Asegúrate de que este campo exista
 
-    @OneToMany(mappedBy = "registro", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Producto> productos;
+	@OneToMany(mappedBy = "registro", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Producto> productos;
 }
